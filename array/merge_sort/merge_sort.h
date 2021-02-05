@@ -16,10 +16,11 @@ void merge(int *arr, int const head, int const mid, int const tail) {
   int left_index = 0, right_index = 0, total_index = head;
   // start merging. ascending order
   while (left_index < left_length && right_index < right_length) {
-    if (left_arr[left_index] <= right_arr[right_index])
-    arr[total_index++] = left_arr[left_index++];
-    else
-    arr[total_index++] = right_arr[right_index++];
+    if (left_arr[left_index] <= right_arr[right_index]) {
+      arr[total_index++] = left_arr[left_index++];
+    } else {
+      arr[total_index++] = right_arr[right_index++];
+    }
   }
   // if one side is used up, just put the other side back
   while (left_index < left_length) {
