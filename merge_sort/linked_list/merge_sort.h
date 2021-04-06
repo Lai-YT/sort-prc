@@ -1,4 +1,4 @@
-#include "./linked_list.h"
+#include "linked_list.h"
 
 LinkedList Merge(LinkedList leftList, LinkedList rightList) {
   Node *leftCurr = leftList.head, *rightCurr = rightList.head;

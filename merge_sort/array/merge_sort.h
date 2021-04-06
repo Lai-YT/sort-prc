@@ -3,31 +3,31 @@
 /* this method modifies the input array */
 
 void merge(int *arr, int const head, int const mid, int const tail) {
-  int const left_length = mid - head + 1, right_length = tail - mid;
+  int const left_len = mid - head + 1, right_len = tail - mid;
   // copy the data, which will be put back into arr
-  int left_arr[left_length], right_arr[right_length];
-  for (int i = 0; i < left_length; i++) {
+  int left_arr[left_len], right_arr[right_len];
+  for (int i = 0; i < left_len; i++) {
     left_arr[i] = arr[head + i];
   }
-  for (int i = 0; i < right_length; i++) {
+  for (int i = 0; i < right_len; i++) {
     right_arr[i] = arr[mid + 1 + i];
   }
 
-  int left_index = 0, right_index = 0, total_index = head;
+  int left_idx = 0, right_idx = 0, total_idx = head;
   // start merging. ascending order
-  while (left_index < left_length && right_index < right_length) {
-    if (left_arr[left_index] <= right_arr[right_index]) {
-      arr[total_index++] = left_arr[left_index++];
+  while (left_idx < left_len && right_idx < right_len) {
+    if (left_arr[left_idx] <= right_arr[right_idx]) {
+      arr[total_idx++] = left_arr[left_idx++];
     } else {
-      arr[total_index++] = right_arr[right_index++];
+      arr[total_idx++] = right_arr[right_idx++];
     }
   }
   // if one side is used up, just put the other side back
-  while (left_index < left_length) {
-    arr[total_index++] = left_arr[left_index++];
+  while (left_idx < left_len) {
+    arr[total_idx++] = left_arr[left_idx++];
   }
-  while (right_index < right_length) {
-    arr[total_index++] = right_arr[right_index++];
+  while (right_idx < right_len) {
+    arr[total_idx++] = right_arr[right_idx++];
   }
 }
 

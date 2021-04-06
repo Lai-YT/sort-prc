@@ -1,7 +1,8 @@
-#include "../merge_sort/merge_sort.h"
+#include "merge_sort.h"
 
 int main(int argc, char const *argv[]) {
   int size_of_list = 0;
+  printf("Key in the list size: ");
   scanf("%d", &size_of_list);
   LinkedList list = {
     .head = NULL,
