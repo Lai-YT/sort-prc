@@ -1,9 +1,15 @@
 #include <iostream>
 #include <utility>
-#include <vector>
+// compare deque with std::vector,
+// push_front is more efficient than insert(begin, 0)
+// and pop pop_front better than erase(begin)
+#include <deque>
 
-void MaxHeapify(std::vector<int> &arr, int root, size_t size) {
-  int left = root * 2, right = root * 2 + 1, largest = root;
+void MaxHeapify(std::deque<int> &arr, int root, size_t size) {
+  // precedence of bit-wise shift(<<) is behind addition(+)
+  int left = root << 1,
+      right = (root << 1) + 1,
+      largest = root;
   // check if root is bigger then the children
   if (left <= size && arr.at(left) > arr.at(largest)) {
     largest = left;
@@ -22,16 +28,16 @@ void MaxHeapify(std::vector<int> &arr, int root, size_t size) {
 // index 0 of the array is not used,
 // which makes it more easy to calculate child nodes by index
 
-void BuildMaxHeap(std::vector<int> &arr) {
+void BuildMaxHeap(std::deque<int> &arr) {
   // i > 0 because index 0 is not used
-  for (size_t i = arr.size() / 2; i > 0; --i) {
+  for (size_t i = arr.size() >> 1; i > 0; --i) {
     MaxHeapify(arr, i, arr.size() - 1);
   }
 }
 
-void HeapSort(std::vector<int> &arr) {
+void HeapSort(std::deque<int> &arr) {
   // because index 0 will not be sorted
-  arr.insert(arr.begin(), 0);
+  arr.push_front(0);
   // make the array become max heap, so can sort
   BuildMaxHeap(arr);
 
@@ -44,5 +50,5 @@ void HeapSort(std::vector<int> &arr) {
     MaxHeapify(arr, 1, --size);
   }
   // remove index 0, since it's not part of the original arr
-  arr.erase(arr.begin());
+  arr.pop_front();
 }
