@@ -4,14 +4,14 @@
 #include <utility>
 // compare deque with std::vector,
 // push_front is more efficient than insert(begin, 0)
-// and pop pop_front better than erase(begin)
+// and pop_front better than erase(begin)
 #include <deque>
 
+template<typename T>
 class Heap {
 public:
-  Heap(std::deque<int> &arr)
+  Heap(std::deque<T> &arr)
     :arr_(arr) {
-    BuildMaxHeap();
   }
 
   void BuildMaxHeap() {
@@ -21,12 +21,16 @@ public:
     }
   }
 
-  int& at(int index) {
+  T& at(int index) {
     return arr_.at(index);
   }
 
   int size() const {
     return arr_.size();
+  }
+
+  void Append(T &&data) {
+    arr_.push_back(data);
   }
 
   void Sort() {
@@ -48,7 +52,7 @@ public:
   }
 
 private:
-  std::deque<int> arr_;
+  std::deque<T> arr_;
 
   void MaxHeapify(int root, size_t size) {
     // precedence of bit-wise shift(<<) is behind addition(+)

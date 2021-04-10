@@ -9,6 +9,7 @@
 
 // index 0 of the array is not used,
 // which makes it more easy to calculate child nodes by index
+
 void MaxHeapify(std::deque<int> &arr, int root, size_t size) {
   // precedence of bit-wise shift(<<) is behind addition(+)
   int left = root << 1,

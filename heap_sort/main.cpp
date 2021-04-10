@@ -1,9 +1,21 @@
 #include <cstdlib>
-#include <iostream>
 #include <deque>
+#include <iostream>
 
 #include "heap.hpp"
 #include "heap_sort.hpp"
+
+template<typename Container>
+void CheckAscending(Container& arr) {
+
+  for (size_t i = 1; i < arr.size(); ++i) {
+    if (arr.at(i) < arr.at(i - 1)) {
+      std::cout << "Fail!" << '\n';
+      return;
+    }
+  }
+  std::cout << "Success!" << '\n';
+}
 
 int main(int argc, char const *argv[]) {
   std::srand(time(0));
@@ -17,41 +29,30 @@ int main(int argc, char const *argv[]) {
 
     HeapSort(arr);
 
-    // order check
-    bool s_flag = true;  // success flag
-    for (size_t i = 1; i < arr.size() && s_flag; ++i) {
-      if (arr.at(i) < arr.at(i - 1)) {
-        std::cout << "Fail!" << '\n';
-        s_flag = false;
-      }
-    }
-    if (s_flag) {
-      std::cout << "Success!" << '\n';
-    }
+    CheckAscending(arr);
   }
 
   //-----Heap-----
 
   {
-    std::deque<int> arr(25);
+    std::deque<int> arr(1000);
     for (int &n : arr) {
-      n = std::rand() % 100;
+      n = std::rand() % 100000;
     }
 
-    Heap heap(arr);
+    Heap<int> heap(arr);
     heap.Sort();
 
-    // order check
-    bool s_flag = true;  // success flag
-    for (size_t i = 1; i < heap.size() && s_flag; ++i) {
-      if (heap.at(i) < heap.at(i - 1)) {
-        std::cout << "Fail!" << '\n';
-        s_flag = false;
-      }
+    CheckAscending(heap);
+
+    for (size_t i = 0; i < 100; ++i) {
+      heap.Append(std::rand() % 100);
     }
-    if (s_flag) {
-      std::cout << "Success!" << '\n';
-    }
+
+    heap.Sort();
+
+    CheckAscending(heap);
   }
+
   return 0;
 }
