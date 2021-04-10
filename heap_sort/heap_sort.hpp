@@ -1,10 +1,14 @@
-#include <iostream>
+#ifndef HEAP_SORT_HPP_
+#define HEAP_SORT_HPP_
+
 #include <utility>
 // compare deque with std::vector,
 // push_front is more efficient than insert(begin, 0)
 // and pop pop_front better than erase(begin)
 #include <deque>
 
+// index 0 of the array is not used,
+// which makes it more easy to calculate child nodes by index
 void MaxHeapify(std::deque<int> &arr, int root, size_t size) {
   // precedence of bit-wise shift(<<) is behind addition(+)
   int left = root << 1,
@@ -24,9 +28,6 @@ void MaxHeapify(std::deque<int> &arr, int root, size_t size) {
     MaxHeapify(arr, largest, size);
   }
 }
-
-// index 0 of the array is not used,
-// which makes it more easy to calculate child nodes by index
 
 void BuildMaxHeap(std::deque<int> &arr) {
   // i > 0 because index 0 is not used
@@ -52,3 +53,5 @@ void HeapSort(std::deque<int> &arr) {
   // remove index 0, since it's not part of the original arr
   arr.pop_front();
 }
+
+#endif /* end of include guard: HEAP_SORT_HPP_ */
