@@ -10,7 +10,7 @@
 // index 0 of the array is not used,
 // which makes it more easy to calculate child nodes by index
 
-void MaxHeapify(std::deque<int> &arr, int root, size_t size) {
+void MaxHeapify(std::deque<int> &arr, int root, const size_t size) {
   // precedence of bit-wise shift(<<) is behind addition(+)
   int left = root << 1,
       right = (root << 1) + 1,
@@ -43,13 +43,12 @@ void HeapSort(std::deque<int> &arr) {
   // make the array become max heap, so can sort
   BuildMaxHeap(arr);
 
-  size_t size = arr.size() - 1;
   // i > 1 because if only 1 remains, it's sorted
-  for (size_t i = size; i > 1; --i) {
+  for (size_t i = arr.size() - 1; i > 1; --i) {
     // swap the leaf with the root
     std::swap(arr.at(1), arr.at(i));
     // omit the last one because it's in the sorted position
-    MaxHeapify(arr, 1, --size);
+    MaxHeapify(arr, 1, i - 1);
   }
   // remove index 0, since it's not part of the original arr
   arr.pop_front();

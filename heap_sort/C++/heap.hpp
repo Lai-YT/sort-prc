@@ -11,8 +11,8 @@ template<typename T>
 class Heap {
 public:
   Heap(std::deque<T> &arr)
-    :arr_(arr) {
-  }
+    :arr_(arr)
+  {}
 
   void BuildMaxHeap() {
     // i > 0 because index 0 is not used
@@ -39,13 +39,12 @@ public:
     // make the array become max heap, so can sort
     BuildMaxHeap();
 
-    size_t size = arr_.size() - 1;
     // i > 1 because if only 1 remains, it's sorted
-    for (size_t i = size; i > 1; --i) {
+    for (size_t i = arr_.size() - 1; i > 1; --i) {
       // swap the leaf with the root
       std::swap(arr_.at(1), arr_.at(i));
       // omit the last one because it's in the sorted position
-      MaxHeapify(1, --size);
+      MaxHeapify(1, i - 1);
     }
     // remove index 0, since it's not part of the original arr
     arr_.pop_front();
@@ -54,7 +53,7 @@ public:
 private:
   std::deque<T> arr_;
 
-  void MaxHeapify(int root, size_t size) {
+  void MaxHeapify(int root, const size_t size) {
     // precedence of bit-wise shift(<<) is behind addition(+)
     int left = root << 1,
         right = (root << 1) + 1,

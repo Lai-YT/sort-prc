@@ -2,19 +2,19 @@
 #include <deque>
 #include <iostream>
 
-#include "heap.hpp"
 #include "heap_sort.hpp"
+#include "heap.hpp"
 
 template<typename Container>
 void CheckAscending(Container& arr) {
 
   for (size_t i = 1; i < arr.size(); ++i) {
     if (arr.at(i) < arr.at(i - 1)) {
-      std::cout << "Fail!" << '\n';
+      std::cout << "fail" << '\n';
       return;
     }
   }
-  std::cout << "Success!" << '\n';
+  std::cout << "pass" << '\n';
 }
 
 int main(int argc, char const *argv[]) {
