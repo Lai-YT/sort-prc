@@ -33,6 +33,10 @@ public:
     arr_.push_back(data);
   }
 
+  void Append(const T &data) {
+    arr_.push_back(data);
+  }
+
   void Sort() {
     // because index 0 will not be sorted
     arr_.push_front(0);
