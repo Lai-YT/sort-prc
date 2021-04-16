@@ -21,7 +21,7 @@ int main(int argc, char const *argv[]) {
   std::srand(time(0));
 
   {
-    // get radom array
+    // get random array
     std::deque<int> arr(1000);
     for (int &n : arr) {
       n = std::rand() % 100000;
