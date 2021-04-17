@@ -13,21 +13,21 @@ void merge(int *arr, int const head, int const mid, int const tail) {
     right_arr[i] = arr[mid + 1 + i];
   }
 
-  int left_idx = 0, right_idx = 0, total_idx = head;
+  int left = 0, right = 0, total = head;
   // start merging. ascending order
-  while (left_idx < left_len && right_idx < right_len) {
-    if (left_arr[left_idx] <= right_arr[right_idx]) {
-      arr[total_idx++] = left_arr[left_idx++];
+  while (left < left_len && right < right_len) {
+    if (left_arr[left] <= right_arr[right]) {
+      arr[total++] = left_arr[left++];
     } else {
-      arr[total_idx++] = right_arr[right_idx++];
+      arr[total++] = right_arr[right++];
     }
   }
   // if one side is used up, just put the other side back
-  while (left_idx < left_len) {
-    arr[total_idx++] = left_arr[left_idx++];
+  while (left < left_len) {
+    arr[total++] = left_arr[left++];
   }
-  while (right_idx < right_len) {
-    arr[total_idx++] = right_arr[right_idx++];
+  while (right < right_len) {
+    arr[total++] = right_arr[right++];
   }
 }
 
