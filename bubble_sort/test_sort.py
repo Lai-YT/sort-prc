@@ -1,13 +1,14 @@
 import unittest
 
-from linked_list import *
-from bubble_sort import *
+from bubble_sort import bubble_sort
+from linked_list import SinglyLinkedList
+
 
 class SortTestCase(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self._list = SinglyLinkedList()
 
-    def test_sort(self):
+    def test_sort(self) -> None:
         self._list.push_back(10)
         self._list.push_back(5)
         self._list.push_back(9)
@@ -21,9 +22,12 @@ class SortTestCase(unittest.TestCase):
         # 10->5->9->6->7->8->4->1->2->3
 
         bubble_sort(self._list)
-        # 1->2->3->4->5->6->7->8->9->10
 
-        curr = self._list.front
-        for i in range(1, 11):
-            self.assertEqual(i, curr.val)
-            curr = curr.next
+        self.assertEqual(
+            str(self._list),
+            '1->2->3->4->5->6->7->8->9->10'
+        )
+
+
+if __name__ == '__main__':
+    unittest.main()
