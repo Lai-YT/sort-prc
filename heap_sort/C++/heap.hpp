@@ -1,11 +1,13 @@
 #ifndef HEAP_HPP_
 #define HEAP_HPP_
 
-#include <utility>
 // compare deque with std::vector,
 // push_front is more efficient than insert(begin, 0)
 // and pop_front better than erase(begin)
 #include <deque>
+#include <utility>
+
+using Index = int;
 
 template<typename T>
 class Heap {
@@ -16,7 +18,7 @@ public:
 
   void BuildMaxHeap() {
     // i > 0 because index 0 is not used
-    for (size_t i = arr_.size() >> 1; i > 0; --i) {
+    for (Index i = arr_.size() >> 1; i > 0; --i) {
       MaxHeapify(i, arr_.size() - 1);
     }
   }
@@ -44,10 +46,11 @@ public:
     BuildMaxHeap();
 
     // i > 1 because if only 1 remains, it's sorted
-    for (size_t i = arr_.size() - 1; i > 1; --i) {
-      // swap the leaf with the root
+    for (Index i = arr_.size() - 1; i > 1; --i) {
+      // Swap the root (with is the current max) to i.
+      // In each iteration, we obtained that i ... arr.size() - 1 is sorted,
+      // so when i == 1, we're done.
       std::swap(arr_.at(1), arr_.at(i));
-      // omit the last one because it's in the sorted position
       MaxHeapify(1, i - 1);
     }
     // remove index 0, since it's not part of the original arr
@@ -57,11 +60,12 @@ public:
 private:
   std::deque<T> arr_;
 
-  void MaxHeapify(int root, const size_t size) {
+  void MaxHeapify(Index root, const size_t size) {
+    Index largest = root;
+    Index left = root << 1;
     // precedence of bit-wise shift(<<) is behind addition(+)
-    int left = root << 1,
-        right = (root << 1) + 1,
-        largest = root;
+    Index right = (root << 1) + 1;
+
     // check if root is bigger then the children
     if (left <= size && arr_.at(left) > arr_.at(largest)) {
       largest = left;
